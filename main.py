@@ -34,5 +34,5 @@ if __name__ == '__main__':
 
     print(stat.count_indreby(data_set))
     print(stat.even_or_uneven(data_set))
-    x, y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
-    print(plotter.bar_plot_public_vs_private(x,y1,y2))
+    y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
+    print(plotter.bar_plot_public_vs_private(y1,y2))

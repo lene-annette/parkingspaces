@@ -42,21 +42,11 @@ def even_or_uneven(data_set):
         return f'\nThere is most parking spot in the uneven side with {len(uneven)} spots'
 
 def distibution_of_public_vs_nonpublic(data_set):
-    list_of_subcity = []
-    list_of_privat_parking = []
-
-    for data in data_set:
-        if data[6] not in list_of_subcity:
-            list_of_subcity.append(data[6])
-        else:
-            continue
-
     list_of_privat_parking = []
     list_of_public_parking = []
     c1=c2=c3=c4=c5=c6=c7=c8=c9=c10 = 0
     oc1=oc2=oc3=oc4=oc5=oc6=oc7=oc8=oc9=oc10 = 0
 
-    
     for data in data_set:
         if data[6] == 'Vesterbro-Kongens Enghave' and 'Privat' in data[4]:
             c1 += 1
@@ -102,6 +92,4 @@ def distibution_of_public_vs_nonpublic(data_set):
         elif data[6] == 'Bispebjerg' and 'Kommunevej' in data[4]:
             oc10 += 1
     list_of_public_parking.extend([oc1,oc2,oc3,oc4,oc5,oc6,oc7,oc8,oc9,oc10])
-    del list_of_subcity[-2]
-    print(list_of_subcity)
-    return (list_of_subcity, list_of_privat_parking, list_of_public_parking)
+    return (list_of_privat_parking, list_of_public_parking)
