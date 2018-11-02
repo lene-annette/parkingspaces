@@ -2,13 +2,14 @@
 Usage: 
     python main.py [<url>]
 Example:
-   python main.py TBD
+   python main.py http://wfs-kbhkort.kk.dk/k101/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=k101:p_pladser&outputFormat=csv&SRSNAME=EPSG:4326
 '''
 
 import os
 import sys
 from lib.converter import convert
 from lib.download import download 
+import lib.plotting as plotter
 import lib.statistic as stat
 
 if __name__ == '__main__':
@@ -32,5 +33,6 @@ if __name__ == '__main__':
     data_set = convert(file_name)
 
     print(stat.count_indreby(data_set))
-
-
+    print(stat.even_or_uneven(data_set))
+    x, y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
+    print(plotter.bar_plot_public_vs_private(x,y1,y2))
