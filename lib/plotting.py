@@ -4,9 +4,14 @@ import numpy as np
 import os
 import matplotlib.dates as mdates
 import pandas as pd
+from matplotlib.ticker import FuncFormatter
 
 
 def bar_plot_public_vs_private(y1,y2):
+
+    my_sum = sum(y1) + sum(y2)
+    new_y1 = [(x/my_sum)*100 for x in y1]
+    new_y2 = [(x/my_sum)*100 for x in y2]
 
     bar_width = 0.4
     x = 10
@@ -14,9 +19,9 @@ def bar_plot_public_vs_private(y1,y2):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    reacts1 = ax.bar(ind, y1, bar_width, color='royalblue')
-    reacts2 = ax.bar(ind+bar_width, y2, bar_width, color='seagreen')
-    ax.set_ylabel('Parking spots')
+    reacts1 = ax.bar(ind, new_y1, bar_width, color='royalblue')
+    reacts2 = ax.bar(ind+bar_width, new_y2, bar_width, color='seagreen')
+    ax.set_ylabel('Parking spots in %')
     ax.set_title('Parking spots public/private in Copenhagen')
     ax.set_xticks(ind + bar_width / 2)
     ax.set_xticklabels( ('Vesterbro', 'Indre By', 'Brønshøj-Husum','Vanløse','Valby','Amager Øst','Amager Vest','Østerbro','Nørrebro','Bispebjerg'))
