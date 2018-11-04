@@ -28,3 +28,19 @@ def bar_plot_public_vs_private(y1,y2):
     plt.xticks(rotation=60)
     ax.legend(['Private','Public'])
     plt.show()
+
+def plot_parking_vs_income(earnings,private_list,ecars):
+    bar_width = 0.4
+    x =10
+    index = np.arange(x)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    reacts1 = ax.bar(index, private_list, bar_width, color='red')
+    reacts2 = ax.bar(index+bar_width, ecars, bar_width, color='seagreen')
+    ax.set_xticks(index + bar_width / 2)
+    plt.xticks(rotation=60)
+    ax.set_xlabel('average earnings')
+    ax.set_ylabel('antal parkerings pladser')
+    ax.set_xticklabels( ('Vesterbro', 'Indre By', 'Brønshøj-Husum','Vanløse','Valby','Amager Øst','Amager Vest','Østerbro','Nørrebro','Bispebjerg'))
+    ax.legend(['Privat','Elbil'])
+    plt.show()

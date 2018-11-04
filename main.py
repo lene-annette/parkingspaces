@@ -7,7 +7,7 @@ Example:
 
 import os
 import sys
-from lib.converter import convert
+import lib.converter as convert
 from lib.download import download 
 import lib.plotting as plotter
 import lib.statistic as stat
@@ -30,9 +30,13 @@ if __name__ == '__main__':
     #     sys.exit(1)  
 
     file_name = 'p_pladser.csv' 
-    data_set = convert(file_name)
+    file_name1 = 'indkomstbruttohustypev.csv'
+    data_set = convert.convert(file_name)
+    data_set2 = convert.convert2(file_name1)
 
-    print(stat.count_indreby(data_set))
-    print(stat.even_or_uneven(data_set))
-    y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
-    print(plotter.bar_plot_public_vs_private(y1,y2))
+    #print(stat.count_indreby(data_set))
+    #print(stat.even_or_uneven(data_set))
+    #y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
+    #print(plotter.bar_plot_public_vs_private(y1,y2))
+    list_earnings, list_privat, list_ecar = (stat.distribution_of_parkingspots_for_income(data_set,data_set2))
+    print(plotter.plot_parking_vs_income(list_earnings,list_privat,list_ecar))

@@ -15,6 +15,7 @@ def convert(file_name):
         reader = csv.reader(fp)
         next(reader)
         data_set = []
+        
 
         print('cleaning up data...')
         
@@ -30,3 +31,32 @@ def convert(file_name):
 
     print('finished reading and cleaning data!')
     return data_set
+
+def convert2(file_name):
+    '''
+        this function cleans the data in the given csv file
+    '''
+
+    print('\nReading data from file to memory...')
+    
+    with open(file_name) as fp:
+        reader = csv.reader(fp)
+        next(reader)
+        data_set2 = []
+
+        print('cleaning up data...')
+        
+        for line in reader: 
+            try:
+                AAR,BYDEL,DISTRIKTSNAVN,HUSTYPE,FAMILIEGRUPPE,FAMILIETYPE,BRUTTOINDKOM,INDKOMSTKATEGORI,HUSTANDE = line
+                #converting strings to int or float
+                hustande = int(HUSTANDE)
+                bruttoindkom = int(BRUTTOINDKOM)
+                #appending cleaned data to array
+                #OBS der er byttet om på BRUTTOINKOM og INDKOMST KATEGORI i data sættet
+                data_set2.append([AAR,BYDEL,DISTRIKTSNAVN,HUSTYPE,FAMILIEGRUPPE,FAMILIETYPE,bruttoindkom,INDKOMSTKATEGORI,hustande])
+            except:
+                pass
+
+    print('finished reading and cleaning data!')
+    return data_set2
