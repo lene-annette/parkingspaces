@@ -2,6 +2,8 @@
     Functions to be used in order to analyze csv file. 
 '''
 import collections
+import pandas as pd
+
 
 def count_indreby(data_set):
     count = 0
@@ -16,30 +18,24 @@ def count_indreby(data_set):
     return f'\nThere are {count} parking spaces in Indre By & the road with the most parkingspots is {road_with_most_spots}'
 
 def even_or_uneven(data_set):
-    even = []
-    uneven= []
-    for data in data_set:
-        if data[5] == 'Lige husnr.':
-            even.append(data)
-        elif data[5] == 'Ulige husnr.':
-            uneven.append(data)
+    even_number = 0
+    uneven_number = 0
     even_marked = 0
     uneven_marked = 0
-    #Making it search for only 'Af' because data is faulty so æ is just a box of dots
-    for e in even:
-        if e[8][0:2] == 'Af':
-            even_marked += 1
-    for u in uneven:
-        if u[8][0:2] == 'Af':
-            uneven_marked += 1
+    for data in data_set:
+        if data[5] == 'Lige husnr.':
+            even_number += data[2]
+            #Making it search for only 'Af' because data is faulty so æ is just a box of dots
+            if data[8][0:2] == 'Af':
+                even_marked += data[2]
+        elif data[5] == 'Ulige husnr.':
+            uneven_number += data[2]
+            #Making it search for only 'Af' because data is faulty so æ is just a box of dots
+            if data[8][0:2] == 'Af':
+                uneven_marked += data[2]
+        #even_number > uneven_number & uneven_marked > even_marked
+    return f'\nThere is most parking spot in the even side with {even_number} but there are more spots with marked parking in the uneven side with {uneven_marked}'
 
-    #uneven_marked is the larger number
-    #Even has the most spots
-    if len(even) > len(uneven):
-        return f'\nThere is most parking spot in the even side with {len(even)} but there are more spots with marked parking in the uneven side with {uneven_marked}'
-
-    elif len(even) < len(uneven):
-        return f'\nThere is most parking spot in the uneven side with {len(uneven)} spots'
 
 def distibution_of_public_vs_nonpublic(data_set):
     list_of_privat_parking = []
@@ -49,52 +45,53 @@ def distibution_of_public_vs_nonpublic(data_set):
 
     for data in data_set:
         if data[6] == 'Vesterbro-Kongens Enghave' and 'Privat' in data[4]:
-            c1 += 1
+            c1 += data[2]
         elif data[6] == 'Indre By' and 'Privat' in data[4]:
-            c2 += 1
+            c2 += data[2]
         elif 'Husum' in data[6][9:14] and 'Privat' in data[4]:
-            c3 += 1
+            c3 += data[2]
         elif 'Vanl' in data[6][:4] and 'Privat' in data[4]:
-            c4 += 1
+            c4 += data[2]
         elif data[6] == 'Valby' and 'Privat' in data[4]:
-            c5 += 1
+            c5 += data[2]
         elif 'Amager' in data[6] and 'st' in data[6][8:10] and 'Privat' in data[4]:
-            c6 += 1
+            c6 += data[2]
         elif data[6] == 'Amager Vest' and 'Privat' in data[4]:
-            c7 += 1
+            c7 += data[2]
         elif data[6][1:] == 'sterbro' and 'Privat' in data[4]:
-            c8 += 1
+            c8 += data[2]
         elif data[6][2:8] == 'rrebro' and 'Privat' in data[4]:
-            c9 += 1
+            c9 += data[2]
         elif data[6] == 'Bispebjerg' and 'Privat' in data[4]:
-            c10 += 1
+            c10 += data[2]
     list_of_privat_parking.extend([c1,c2,c3,c4,c5,c6,c7,c8,c9,c10])
 
     for data in data_set:
         if data[6] == 'Vesterbro-Kongens Enghave' and 'Kommunevej' in data[4]:
-            oc1 += 1
+            oc1 += data[2]
         elif data[6] == 'Indre By' and 'Kommunevej' in data[4]:
-            oc2 += 1
+            oc2 += data[2]
         elif 'Husum' in data[6][9:14] and 'Kommunevej' in data[4]:
-            oc3 += 1
+            oc3 += data[2]
         elif 'Vanl' in data[6][:4] and 'Kommunevej' in data[4]:
-            oc4 += 1
+            oc4 += data[2]
         elif data[6] == 'Valby' and 'Kommunevej' in data[4]:
-            oc5 += 1
+            oc5 += data[2]
         elif 'Amager' in data[6] and 'st' in data[6][8:10] and 'Kommunevej' in data[4]:
-            oc6 += 1
+            oc6 += data[2]
         elif data[6] == 'Amager Vest' and 'Kommunevej' in data[4]:
-            oc7 += 1
+            oc7 += data[2]
         elif data[6][1:] == 'sterbro' and 'Kommunevej' in data[4]:
-            oc8 += 1
+            oc8 += data[2]
         elif data[6][2:8] == 'rrebro' and 'Kommunevej' in data[4]:
-            oc9 += 1
+            oc9 += data[2]
         elif data[6] == 'Bispebjerg' and 'Kommunevej' in data[4]:
-            oc10 += 1
+            oc10 += data[2]
     list_of_public_parking.extend([oc1,oc2,oc3,oc4,oc5,oc6,oc7,oc8,oc9,oc10])
     return (list_of_privat_parking, list_of_public_parking)
 
-def famili_type_best_options (data_set):
+def family_type_best_options (data_set2):
+
     return 'WTF'
 
 def distribution_of_parkingspots_for_income (data_set, data_set2):
@@ -103,25 +100,25 @@ def distribution_of_parkingspots_for_income (data_set, data_set2):
     c1=c2=c3=c4=c5=c6=c7=c8=c9=c10 = 0
     for data in data_set:
         if data[6] == 'Vesterbro-Kongens Enghave' and 'El-Bil plads' in data[7]:
-            c1 += 1
+            c1 += data[2]
         elif data[6] == 'Indre By' and 'El-Bil pladsvat' in data[7]:
-            c2 += 1
+            c2 += data[2]
         elif 'Husum' in data[6][9:14] and 'El-Bil plads' in data[7]:
-            c3 += 1
+            c3 += data[2]
         elif 'Vanl' in data[6][:4] and 'El-Bil plads' in data[7]:
-            c4 += 1
+            c4 += data[2]
         elif data[6] == 'Valby' and 'El-Bil plads' in data[7]:
-            c5 += 1
+            c5 += data[2]
         elif 'Amager' in data[6] and 'st' in data[6][8:10] and 'El-Bil plads' in data[7]:
-            c6 += 1
+            c6 += data[2]
         elif data[6] == 'Amager Vest' and 'El-Bil plads' in data[7]:
-            c7 += 1
+            c7 += data[2]
         elif data[6][1:] == 'sterbro' and 'El-Bil plads' in data[7]:
-            c8 += 1
+            c8 += data[2]
         elif data[6][2:8] == 'rrebro' and 'El-Bil plads' in data[7]:
-            c9 += 1
+            c9 += data[2]
         elif data[6] == 'Bispebjerg' and 'El-Bil plads' in data[7]:
-            c10 += 1
+            c10 += data[2]
     list_of_ecar.extend([c1,c2,c3,c4,c5,c6,c7,c8,c9,c10])
     indkomst1=indkomst2=indkomst3=indkomst4=indkomst5=indkomst6=indkomst7=indkomst8=indkomst9=indkomst10 = 0
     list_of_earnings = []
@@ -359,4 +356,19 @@ def distribution_of_parkingspots_for_income (data_set, data_set2):
     average9 = indkomst9/hustande9
     average10 = indkomst10/hustande10
     list_of_earnings.extend([average4,average1,average7,average6,average5,average9,average10,average2,average3,average8])
-    return (list_of_earnings, list_privat, list_of_ecar)
+    list_of_city_names = ['Vesterbro', 'Indre By', 'Brønshøj-Husum','Vanløse','Valby','Amager Øst','Amager Vest','Østerbro','Nørrebro','Bispebjerg']
+    df = pd.DataFrame(
+        {
+            'city_name': list_of_city_names,
+            'earnings': list_of_earnings,
+            'private': list_privat
+        })
+
+    df1 = pd.DataFrame(
+        {
+            'city_name': list_of_city_names,
+            'earnings': list_of_earnings,
+            'Ecar parking': list_of_ecar
+        })
+    
+    return (df, df1)
