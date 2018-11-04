@@ -34,9 +34,9 @@ if __name__ == '__main__':
     data_set = convert.convert(file_name)
     data_set2 = convert.convert2(file_name1)
 
-    #print(stat.count_indreby(data_set))
-    #print(stat.even_or_uneven(data_set))
-    #y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
-    #print(plotter.bar_plot_public_vs_private(y1,y2))
+    print(stat.count_indreby(data_set))
+    print(stat.even_or_uneven(data_set))
+    y1, y2 = stat.distibution_of_public_vs_nonpublic(data_set)
+    print(plotter.bar_plot_public_vs_private(y1,y2))
     list_earnings, list_privat, list_ecar = (stat.distribution_of_parkingspots_for_income(data_set,data_set2))
     print(plotter.plot_parking_vs_income(list_earnings,list_privat,list_ecar))
